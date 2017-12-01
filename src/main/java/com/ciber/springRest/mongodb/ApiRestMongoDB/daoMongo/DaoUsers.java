@@ -26,19 +26,19 @@ public class DaoUsers {
 	MongoTemplate mongo;
 
 	public List<Usuario> findAll() {
-		return mongo.findAll(Usuario.class, "usuarios2");
+		return mongo.findAll(Usuario.class, "usuarios");
 	}
 
 	public Collection<Usuario> searchUsers(String text) {
 
 		return (Collection<Usuario>) mongo.find(Query.query(new Criteria()
 				.orOperator(Criteria.where("nombre").regex(text, "i"), Criteria.where("apellidos").regex(text, "i"))),
-				Usuario.class, "usuarios2");
+				Usuario.class, "usuarios");
 	}
 
 	public Usuario addUser(Usuario user) {
 		try {
-			mongo.insert(user, "usuarios2");
+			mongo.insert(user, "usuarios");
 			return user;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -48,18 +48,18 @@ public class DaoUsers {
 	}
 
 	public Usuario findUser(Usuario user) {
-		return mongo.findOne(queryFindByName(user), Usuario.class, "usuario2");
+		return mongo.findOne(queryFindByName(user), Usuario.class, "usuario");
 	}
 
 	public Usuario findUser(String user) {
-		return mongo.findOne(queryFindByName(user), Usuario.class, "usuarios2");
+		return mongo.findOne(queryFindByName(user), Usuario.class, "usuarios");
 	}
 
 	public String deleteUser(String nombre) {
 		if (findUser(nombre)==null) {
 			return "Usuario no encontrado";
 		}
-		mongo.findAllAndRemove(queryFindByName(nombre), Usuario.class, "usuarios2");
+		mongo.findAllAndRemove(queryFindByName(nombre), Usuario.class, "usuarios");
 		return "Usuario borrado";
 	}
 

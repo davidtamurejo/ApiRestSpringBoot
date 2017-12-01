@@ -26,7 +26,7 @@ public class SimpleMongoConfig {
     
     @Bean
     public MongoTemplate mongoLogin() throws Exception {
-        return new MongoTemplate(mongo(), "baseprueba");
+        return new MongoTemplate(mongo(), "usuarioslogin");
     }
 
    
